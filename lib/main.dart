@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'core/local/local_pref.dart';
 import 'core/services/services_locator.dart';
 import 'features/checkout/presentation/screens/checkout_scr.dart';
+import 'features/home/presentation/screens/contact_scr.dart';
 import 'features/home/presentation/screens/home_scr.dart';
 import 'features/home/presentation/screens/privacy_policy_scr.dart';
 import 'features/home/presentation/screens/terms_conditions_scr.dart';
@@ -46,7 +47,8 @@ class MyApp extends StatelessWidget {
             OrderCompleteScr.route: (context) => OrderCompleteScr(),
             PrivacyPolicyScr.route: (context) => PrivacyPolicyScr(),
             TermsConditionsScr.route: (context) => TermsConditionsScr(),
-            CheckoutScr.route: (context) => CheckoutScr()
+            CheckoutScr.route: (context) => CheckoutScr(),
+            ContactScr.route: (context) => ContactScr()
           },
         ));
   }

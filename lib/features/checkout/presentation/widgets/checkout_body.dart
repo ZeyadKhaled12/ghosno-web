@@ -41,7 +41,8 @@ class CheckoutBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildLogo(),
+                Image.asset(ImgAsset.logo,
+                    width: 129, color: AppColors.primary),
                 const SizedBox(height: 30),
                 CheckoutWidgetFrom(
                     isMobile: false,
@@ -78,16 +79,13 @@ class CheckoutBody extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildLogo(),
-                const Icon(Icons.shopping_bag_outlined, color: Colors.black87),
-              ],
-            ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 12.0),
+                child: Image.asset(ImgAsset.logo,
+                    width: 129, color: AppColors.primary)),
           ),
           const Divider(height: 1),
           CheckoutWidgetMobileSummary(
@@ -111,10 +109,6 @@ class CheckoutBody extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Widget _buildLogo() {
-    return Image.asset(ImgAsset.logo, width: 129, color: AppColors.primary);
   }
 }
 

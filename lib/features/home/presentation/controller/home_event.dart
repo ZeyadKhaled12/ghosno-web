@@ -27,3 +27,10 @@ class BuyEvent extends HomeEvent {
   @override
   List<Object> get props => [buyParameters];
 }
+
+class SendCommentEvent extends HomeEvent {
+  final SendCommentParameters sendCommentParameters;
+  const SendCommentEvent({required this.sendCommentParameters});
+  @override
+  List<Object> get props => [sendCommentParameters];
+}

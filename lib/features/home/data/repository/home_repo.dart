@@ -6,6 +6,7 @@ import 'package:ghosno/features/home/data/models/product_model.dart';
 import 'package:ghosno/features/home/domain/repository/base_home_repo.dart';
 import 'package:ghosno/features/home/domain/usecases/add_to_cart_uc.dart';
 import 'package:ghosno/features/home/domain/usecases/buy_uc.dart';
+import 'package:ghosno/features/home/domain/usecases/send_comment_uc.dart';
 
 import '../../../../core/network/error/exception.dart';
 
@@ -40,6 +41,17 @@ class HomeRepo extends BaseHomeRepo {
   Future<Either<Failure, void>> buy(BuyParameters parameters) async {
     try {
       final result = await baseHomeRemoteDataSource.buy(parameters);
+      return Right(result);
+    } on ServerException catch (failure) {
+      return Left(ServerFailure(failure.errorMessageModel));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> sendComment(
+      SendCommentParameters parameters) async {
+    try {
+      final result = await baseHomeRemoteDataSource.sendComment(parameters);
       return Right(result);
     } on ServerException catch (failure) {
       return Left(ServerFailure(failure.errorMessageModel));

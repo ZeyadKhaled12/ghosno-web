@@ -66,7 +66,7 @@ class _ResponsiveStepWidget extends StatelessWidget {
 
   Widget _buildMobileLayout(BuildContext context, bool isRight) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 50, vertical: 24),
+      margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 24),
       decoration: BoxDecoration(
         color: AppColors.primary,
         borderRadius: BorderRadius.circular(15),
@@ -151,6 +151,7 @@ class _ResponsiveStepWidget extends StatelessWidget {
       children: [
         Text(
           title,
+          textAlign: isRight ? TextAlign.end : null,
           style: AppFont(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 28),
         ),

@@ -167,7 +167,6 @@ class _CheckoutWidgetOrderSummaryState
             ],
           ),
 
-          // --- NEW DISCOUNT ROW ADDED HERE ---
           if (widget.calculateResultModel.discountAmount != null &&
               widget.calculateResultModel.discountAmount! > 0) ...[
             const SizedBox(height: 12),

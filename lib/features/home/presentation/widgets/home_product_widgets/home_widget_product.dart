@@ -113,7 +113,7 @@ class HomeWidgetProduct extends StatelessWidget {
           image: productModel.imageUrl == null
               ? AssetImage(ImgAsset.product) as ImageProvider
               : NetworkImage(productModel.imageUrl!),
-          fit: BoxFit.cover,
+          fit: BoxFit.contain,
         ),
         borderRadius: BorderRadius.circular(24),
       ),

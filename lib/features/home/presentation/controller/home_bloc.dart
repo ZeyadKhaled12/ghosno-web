@@ -9,6 +9,7 @@ import 'package:ghosno/features/home/domain/usecases/buy_uc.dart';
 import 'package:ghosno/features/home/domain/usecases/get_products_uc.dart';
 
 import '../../../../core/utils/enums.dart';
+import '../../domain/usecases/send_comment_uc.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
@@ -17,11 +18,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetProductsUc getProductsUc;
   final AddToCartUc addToCartUc;
   final BuyUc buyUc;
-  HomeBloc(this.getProductsUc, this.addToCartUc, this.buyUc)
+  final SendCommentUc sendCommentUc;
+  HomeBloc(this.getProductsUc, this.addToCartUc, this.buyUc, this.sendCommentUc)
       : super(HomeState()) {
     on<GetProductsEvent>(_getProduct);
     on<AddToCartEvent>(_addToCart);
     on<BuyEvent>(_buy);
+    on<SendCommentEvent>(_sendComment);
   }
 
   FutureOr<void> _getProduct(
@@ -60,5 +63,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             productErrorMessage: l.errorMessageModel.statusMessage)),
         (r) => emit(state.copyWith(
             buyRequestState: RequestState.loaded, productErrorMessage: '')));
+  }
+
+  FutureOr<void> _sendComment(
+      SendCommentEvent event, Emitter<HomeState> emit) async {
+    emit(state.copyWith(homeRequestState: RequestState.loading));
+    final result = await sendCommentUc.call(event.sendCommentParameters);
+    result.fold(
+        (l) => emit(state.copyWith(
+            homeRequestState: RequestState.error,
+            productErrorMessage: l.errorMessageModel.statusMessage)),
+        (r) => emit(state.copyWith(
+            homeRequestState: RequestState.loaded, productErrorMessage: '')));
   }
 }

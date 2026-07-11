@@ -11,11 +11,13 @@ import '../../../../core/network/error/exception.dart';
 import '../../../../core/network/error/handle_logic_errors.dart';
 import '../../../../core/usecase/base_use_case.dart';
 import '../../../../core/utils/app_api.dart';
+import '../../domain/usecases/send_comment_uc.dart';
 
 abstract class BaseHomeRemoteDataSource {
   Future<List<ProductModel>> getProducts(NoParameters parameters);
   Future<void> addToCart(AddToCartParameters parameters);
   Future<void> buy(BuyParameters parameters);
+  Future<void> sendComment(SendCommentParameters parameters);
 }
 
 class HomeRemoteDataSource extends BaseHomeRemoteDataSource {
@@ -77,6 +79,23 @@ class HomeRemoteDataSource extends BaseHomeRemoteDataSource {
       }
       throw ServerException(
           ErrorMessageModel(statusMessage: res.message ?? ''));
+    }).checkLogicErrors();
+  }
+
+  @override
+  Future<void> sendComment(SendCommentParameters parameters) async {
+    return await HandleLogicErrors<void>(fun: () async {
+      final res = await http.post(Uri.parse(AppApi.sendComment),
+          headers: {'accept': '*/*', 'Content-Type': 'application/json'},
+          body: jsonEncode(parameters.toBody()));
+      if (res.statusCode == 200 ||
+          res.statusCode == 201 ||
+          res.statusCode == 202 ||
+          res.statusCode == 204 ||
+          res.statusCode == 205) {
+        return;
+      }
+      throw ServerException(ErrorMessageModel.fromJson(jsonDecode(res.body)));
     }).checkLogicErrors();
   }
 }

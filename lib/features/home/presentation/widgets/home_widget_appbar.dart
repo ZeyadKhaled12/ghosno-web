@@ -4,6 +4,7 @@ import 'package:ghosno/configs/app_colors.dart';
 import 'package:ghosno/configs/app_font.dart';
 import 'package:ghosno/core/bloc/cart/cart_bloc.dart';
 import 'package:ghosno/core/utils/assets_manager.dart';
+import 'package:ghosno/features/home/presentation/screens/contact_scr.dart';
 import 'package:ghosno/features/home/presentation/screens/home_scr.dart';
 
 class HomeWidgetAppbar {
@@ -19,7 +20,11 @@ class HomeWidgetAppbar {
       elevation: 10,
       shadowColor: Colors.black.withValues(alpha: .5),
       leadingWidth: isDesktop ? 240 : 190,
-      leading: _contactUsBtn(() {}),
+      leading: ModalRoute.of(context)?.settings.name == ContactScr.route
+          ? SizedBox()
+          : _contactUsBtn(() async {
+              await Navigator.pushNamed(context, ContactScr.route);
+            }),
       title: InkWell(
           onTap: () {
             String? currentRoute = ModalRoute.of(context)?.settings.name;

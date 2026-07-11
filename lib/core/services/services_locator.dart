@@ -13,6 +13,7 @@ import 'package:ghosno/features/home/domain/repository/base_home_repo.dart';
 import 'package:ghosno/features/home/domain/usecases/add_to_cart_uc.dart';
 import 'package:ghosno/features/home/domain/usecases/buy_uc.dart';
 import 'package:ghosno/features/home/domain/usecases/get_products_uc.dart';
+import 'package:ghosno/features/home/domain/usecases/send_comment_uc.dart';
 import 'package:ghosno/features/home/presentation/controller/home_bloc.dart';
 
 final sl = GetIt.instance;
@@ -20,7 +21,7 @@ final sl = GetIt.instance;
 class ServicesLocator {
   void init() {
     // Bloc
-    sl.registerFactory(() => HomeBloc(sl(), sl(), sl()));
+    sl.registerFactory(() => HomeBloc(sl(), sl(), sl(), sl()));
     sl.registerFactory(() => CartBloc());
     sl.registerFactory(() => CheckoutBloc(sl(), sl(), sl()));
 
@@ -28,6 +29,7 @@ class ServicesLocator {
     sl.registerLazySingleton(() => GetProductsUc(sl()));
     sl.registerLazySingleton(() => AddToCartUc(sl()));
     sl.registerLazySingleton(() => BuyUc(sl()));
+    sl.registerLazySingleton(() => SendCommentUc(sl()));
 
     //checkout usecases
     sl.registerLazySingleton(() => GetCitiesUc(sl()));

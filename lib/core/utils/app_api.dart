@@ -4,6 +4,7 @@ class AppApi {
   //Home
   static const String getProducts = '$baseUrl/api/v1/products/';
   static const String checkStock = '$baseUrl/api/v1/products/check-stock/';
+  static const String sendComment = '$baseUrl/api/v1/contact/';
 
   //checkout
   static const String getCities = '$baseUrl/api/v1/cities/';
