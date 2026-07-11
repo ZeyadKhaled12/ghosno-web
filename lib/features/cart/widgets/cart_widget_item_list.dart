@@ -72,7 +72,7 @@ class _CartItemDetailsRow extends StatelessWidget {
             children: [
               Text(
                 productModel.name ?? 'Product',
-                style: AppFont(fontSize: 18, fontWeight: FontWeight.bold),
+                style: AppFont(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 4),
               Text(
