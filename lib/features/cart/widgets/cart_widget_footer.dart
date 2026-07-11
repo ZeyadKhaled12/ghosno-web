@@ -25,7 +25,17 @@ class CartWidgetFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<HomeBloc>(),
-      child: BlocBuilder<HomeBloc, HomeState>(
+      child: BlocConsumer<HomeBloc, HomeState>(
+        listener: (context, state) {
+          if (state.buyRequestState == RequestState.loaded) {
+            Navigator.pushNamed(context, CheckoutScr.route,
+                arguments:
+                    CheckoutArgu(productModel: productModel, quantity: quantity)
+                        .toArgu());
+          }
+        },
+        listenWhen: (previous, current) =>
+            previous.buyRequestState != current.buyRequestState,
         builder: (context, state) => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -67,11 +77,6 @@ class CartWidgetFooter extends StatelessWidget {
                       context.read<HomeBloc>().add(BuyEvent(
                           buyParameters: BuyParameters(
                               product: productModel, quantity: quantity)));
-                      Navigator.pushNamed(context, CheckoutScr.route,
-                          arguments: CheckoutArgu(
-                                  productModel: productModel,
-                                  quantity: quantity)
-                              .toArgu());
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.primary,

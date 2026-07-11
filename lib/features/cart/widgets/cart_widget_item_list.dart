@@ -72,7 +72,7 @@ class _CartItemDetailsRow extends StatelessWidget {
             children: [
               Text(
                 productModel.name ?? 'Product',
-                style: AppFont(fontSize: 16, fontWeight: FontWeight.bold),
+                style: AppFont(fontSize: 14, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 4),
               Text(
@@ -104,7 +104,7 @@ class _CartItemActionsRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Wrap(
       children: [
         Container(
           padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
@@ -113,6 +113,7 @@ class _CartItemActionsRow extends StatelessWidget {
             borderRadius: BorderRadius.circular(25),
           ),
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
                 icon: const Icon(Icons.remove, size: 16),
